@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+
+import {Inject,Component,platform} from "angular2/core";
+import {
+	bootstrap,
+    BROWSER_PROVIDERS,
+    BROWSER_APP_PROVIDERS
+} from "angular2/platform/browser";
+
+class Mock{
+	constructor(){
+		this.id = Math.random();
+		console.log("generate ... " + this.id);
+	}
+};
+
+@Component({
+	selector:"ez-a",
+	providers:[Mock],
+	template:"<div>AAAA : {{ mock.id }}</div>",
+})
+class EzA{
+	constructor(@Inject(Mock) m){
+    	this.mock = m;
+		console.log("A got ..." + m.id);
+	}
+}
+
+@Component({
+	selector:"ez-b",
+	providers:[Mock],
+	template:"<div>BBBB : {{ mock.id }}</div>"
+})
+class EzB{
+	constructor(@Inject(Mock) m){
+    	this.mock = m;
+		console.log("B got ..." + m.id);
+	}
+}
+
+@Component({
+	selector:"ez-app",
+	templateUrl: 'ez-app.html',
+	directives:[EzA,EzB]
+})
+class EzApp{
+	constructor(){}
+}
+
+//bootstrap(EzApp)
+var pf = platform(BROWSER_PROVIDERS);
+var app = pf.application([BROWSER_APP_PROVIDERS]);
+app.bootstrap(EzApp);
+
+</script>
+</body>
+</html>

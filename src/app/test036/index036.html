@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+import {Injector,Inject,Injectable,provide,Provider} from "angular2/core";
+
+class Canvas{
+	constructor(@Inject("CANVAS_SELECTOR") selector){
+		var canvas = document.createElement("canvas");
+        canvas.setAttribute("width","600px");
+        canvas.setAttribute("height","400px");
+    	var host = document.querySelector(selector);
+        host.innerHTML = "";
+        host.appendChild(canvas);
+		this.ctx = canvas.getContext("2d");
+	}
+}
+
+class Face{
+	constructor(@Inject("Canvas") canvas){
+		this.canvas = canvas;
+	}
+	render(){
+		with(this.canvas.ctx){
+			beginPath();
+			strokeStyle="black";
+			fillStyle = "black";
+			arc(100,100,100,0,Math.PI*2);
+			stroke();
+			beginPath();
+			arc(70,70,20,0,Math.PI*2);
+			arc(130,70,20,0,Math.PI*2);
+			fill();
+			beginPath();
+			arc(100,110,50,.5,Math.PI-.5);
+			stroke();
+		}
+	}
+}
+
++function bootup(){
+	var injector = Injector.resolveAndCreate([
+    	provide("CANVAS_SELECTOR",{useValue:"ez-app"}),
+		provide("Canvas",{useClass:Canvas,deps:["CANVAS_SELECTOR"]}),
+		Face]);
+	var face = injector.get(Face);
+	face.render();
+}();
+
+</script>
+</body>
+</html>

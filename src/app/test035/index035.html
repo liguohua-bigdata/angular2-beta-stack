@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+import {Injector,Inject,provide,Provider} from "angular2/core";
+
+class Canvas{
+	constructor(){
+		var canvas = document.createElement("canvas");
+        canvas.setAttribute("width","600px");
+        canvas.setAttribute("height","400px");
+    	var host = document.querySelector("ez-app");
+        host.innerHTML = "";
+        host.appendChild(canvas);
+		this.ctx = canvas.getContext("2d");	}
+}
+var canvasFactory = function(){
+	return new Canvas();
+}
+
+class Face{
+	constructor(@Inject("CanvasTokern") canvas,@Inject("COLORTokern") color){
+		this.canvas = canvas;
+		this.color = color;
+	}
+	render(){
+		var self =this;
+		with(this.canvas.ctx){
+			beginPath();
+			strokeStyle= self.color;
+			fillStyle = self.color;
+			arc(100,100,100,0,Math.PI*2);
+			stroke();
+			beginPath();
+			arc(70,70,20,0,Math.PI*2);
+			arc(130,70,20,0,Math.PI*2);
+			fill();
+			beginPath();
+			arc(100,110,50,.5,Math.PI-.5);
+			stroke();
+		}
+	}
+}
+
++function bootup(){
+	var injector = Injector.resolveAndCreate([
+		provide("CanvasTokern",{useFactory:canvasFactory}),
+		provide("COLORTokern",{useValue:"black"}),
+		Face]);
+	var face = injector.get(Face);
+	face.render();
+}();
+
+
+
+
+
+</script>
+</body>
+</html>
