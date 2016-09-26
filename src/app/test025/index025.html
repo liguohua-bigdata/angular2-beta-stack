@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+import {Component} from "angular2/core";
+import {bootstrap} from "angular2/platform/browser";
+import {Control,FORM_DIRECTIVES} from "angular2/common";
+
+@Component({
+	selector:"ez-app",
+	directives:[FORM_DIRECTIVES],
+	templateUrl:'ez-app.html',
+	styleUrls:['ez-app.css']
+})
+class EzApp{
+	constructor(){
+		//创建控件对象
+		this.name = new Control("Jason");
+		this.address = new Control("London U.K.");
+		this.telephone = new Control("114");
+	}
+	dump(){
+		//读取控件对象的值
+		var val = {
+			name : this.name.value,
+			address : this.address.value,
+			telephone : this.telephone.value
+		}
+		return JSON.stringify(val,null,"\t");
+	}
+}
+
+bootstrap(EzApp);
+
+
+
+</script>
+</body>
+</html>

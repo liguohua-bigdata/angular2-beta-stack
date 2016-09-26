@@ -1,0 +1,3 @@
+AsyncPipe是Angular2框架预置的一个有状态管道，它的输入是一个异步对象：Promise对象 、Observable对象或者EventEmitter对象。
+
+每当异步对象产生新的值，AsyncPipe会返回这个新的值，因此，AsyncPipe需要Angular2框架 持续进行变化检测，它的Pipe注解的pure属性值为false。

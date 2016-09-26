@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+import {Component,Pipe} from "angular2/core";
+import {bootstrap} from "angular2/platform/browser";
+
+@Pipe({name:"title"})
+class TitlePipe{
+	transform(input,args){
+		return input.split(" ")
+				.map(word => word[0].toUpperCase() + word.slice(1))
+				.join(" ");
+	}
+}
+
+@Component({
+	selector:"ez-app",
+	template:`
+		<h1>管道/Pipe</h1>
+		<p>{{text | title}}</p>
+	`,
+	pipes : [TitlePipe]
+})
+class EzApp{
+	constructor(){
+		this.text = "what a wonderful world!";
+	}
+}
+
+bootstrap(EzApp);
+</script>
+</body>
+</html>

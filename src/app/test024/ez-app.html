@@ -1,0 +1,18 @@
+<form #f="ngForm">
+    <div>基本信息</div>
+    <!--声明控件组-->
+    <ul ngControlGroup="basic">
+        <li>姓名：<input type="text" ngControl="name"></li>
+        <li>地址：<input type="text" ngControl="address"></li>
+        <li>电话：<input type="text" ngControl="telephone"></li>
+    </ul>
+    <div>专业技能</div>
+    <!--声明控件组-->
+    <ul ngControlGroup="expertise">
+        <li>英语：<input type="checkbox" ngControl="english"></li>
+        <li>科技：<input type="checkbox" ngControl="tech"></li>
+        <li>运动：<input type="checkbox" ngControl="sport"></li>
+    </ul>
+</form>
+<!--调试：实时转储模型的值-->
+<pre>{{decode(f.value)}}</pre>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+import {Component,Pipe} from "angular2/core";
+import {bootstrap} from "angular2/platform/browser";
+import {Observable} from "rxjs/Observable";
+@Component({
+	selector:"ez-app",
+	template:`
+		<h1>AsyncPipe</h1>
+		<p>{{ data | async | json }}</p>
+	`
+})
+class EzApp{
+	constructor(){
+		this.data = window.fetch("api/music.json")
+        	.then( rsp => rsp.json());
+	}
+}
+
+bootstrap(EzApp);
+
+
+</script>
+</body>
+</html>

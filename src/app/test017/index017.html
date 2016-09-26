@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+import {Component} from "angular2/core";
+import {bootstrap} from "angular2/platform/browser";
+import {CORE_DIRECTIVES} from "angular2/common";
+@Component({
+	selector:"ez-app",
+	templateUrl:'ez-app.html',
+    directives:[CORE_DIRECTIVES],
+    styles : [`div{max-width:200px;text-align:right;}`]
+})
+class EzApp{
+	constructor(){
+    	this.data = [
+        	{name:'John',score:89},
+            {name:'Mike',score:72},
+            {name:'Linda',score:93.5},
+            {name:'Luke',score:80},
+            {name:'Jango',score:97},
+            {name:'Ado',score:95},
+            {name:'Peter',score:93}
+            {name:'Mary',score:92},
+            {name:'Tom',score:99}]
+	}
+    avgScore(){
+    	return this.data.map(a=>a.score).reduce((a,b) => a+b , 0) / this.data.length;
+    }
+}
+bootstrap(EzApp);
+</script>
+</body>
+</html>

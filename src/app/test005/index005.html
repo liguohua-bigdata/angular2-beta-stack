@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+    import {Component} from "angular2/core";
+    import {bootstrap} from "angular2/platform/browser";
+    //具有属性接口的组件 - EzCard
+    @Component({
+        selector:"ez-card",
+        styleUrls:["test005.css"]
+        templateUrl :'test005.html'
+    })
+    class EzCard{
+    name;
+    country;
+        constructor(){
+            this.name = "Mike2";
+            this.country = "Sweden";
+        }
+    }
+    //根组件 - EzApp
+    @Component({
+        selector:"ez-app",
+        directives:[EzCard],
+        template:`
+            <div class="ez-app">
+                <h1>EzApp</h1>
+                <ez-card></ez-card>
+            </div>`
+    })
+    class EzApp{}
+    //渲染组件
+    bootstrap(EzApp);
+</script>
+</body>
+</html>

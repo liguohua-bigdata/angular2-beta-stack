@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+    import {Component,EventEmitter} from "angular2/core";
+    import {bootstrap} from "angular2/platform/browser";
+    //具有事件接口的组件 - EzCard
+    @Component({
+        selector:"ez-card",
+        events:["change"],
+        template : `
+            <div class='ez-card'>
+                My name is <b>{{name}}</b>,
+                I am from <b>{{country}}</b>.
+            </div>
+        `
+    })
+    class EzCard{
+        constructor(){
+            this.name = "Mike";
+            this.country = "Sweden";
+            this.change = new EventEmitter();
+            //模拟触发事件
+            setTimeout(()=>this.change.next({
+                src:"EzCard",
+                desc:"模拟事件"
+            }),1000);
+        }
+    }
+    //根组件 - EzApp
+    @Component({
+        selector:"ez-app",
+        directives:[EzCard],
+        template:`
+            <div class="ez-app">
+                <h1>EzApp</h1>
+                <ez-card (change)="onChange($event)"></ez-card>
+                <pre>{{evtStr}}</pre>
+            </div>`
+    })
+    class EzApp{
+        constructor(){
+            this.evtStr
+        }
+        onChange(evt){
+            console.log("sth. occured");
+            this.evtStr = JSON.stringify(evt,null,"\t");
+        }
+    }
+    //渲染组件
+    bootstrap(EzApp);
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<div [ngSwitch]="gender">
+    <template ngSwitchWhen="Male">
+        <img src="male.jpg" class="banner">
+    </template>
+    <template ngSwitchWhen="Female">
+        <img src="female-ad.png" class="banner">
+    </template>
+    <template ngSwitchDefault>
+        <h1>Learn Something, NOW!</h1>
+    </template>
+</div>

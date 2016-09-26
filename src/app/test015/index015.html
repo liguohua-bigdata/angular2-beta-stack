@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+//引入NgSwitch类型
+import {Component,} from "angular2/core";
+import {bootstrap} from "angular2/platform/browser";
+
+@Component({
+	selector : "ez-promotion",
+	properties:["gender"],
+	styleUrls:['ez-promotion.css'],
+	templateUrl :'ez-promotion.html'
+})
+class EzPromotion{
+
+}
+
+@Component({
+	selector:"ez-app",
+	directives:[EzPromotion],
+	templateUrl:'ez-app.html'
+})
+class EzApp{}
+bootstrap(EzApp);
+</script>
+</body>
+</html>

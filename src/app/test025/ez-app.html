@@ -1,0 +1,10 @@
+<div>
+    <ul>
+        <!--将输入元素绑定到已经创建的控件对象-->
+        <li>姓名：<input type="text" [ngFormControl]="name"></li>
+        <li>地址：<input type="text" [ngFormControl]="address"></li>
+        <li>电话：<input type="text" [ngFormControl]="telephone"></li>
+    </ul>
+</div>
+<!--调试：转储模型信息-->
+<pre>{{dump()}}</pre>
