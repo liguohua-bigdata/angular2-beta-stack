@@ -1,0 +1,2 @@
+在EzHilight指令的实现中，我们是直接通过ElementRef对象的nativeElement 属性来直接操作浏览器DOM的，不过Angular2其实不希望我们这么做，因为这将使 我们的代码与浏览器纠缠不清，有违Angular2的跨平台本意 —— 换句话说，这么直接 操作DOM的做法，是反模式的。
+

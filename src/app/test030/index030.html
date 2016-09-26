@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript" src="../../../dist/angular2.beta.stack.min.js"></script>
+</head>
+<body>
+<ez-app></ez-app>
+<script type="text/typescript">
+import {Component,Directive,ElementRef,Renderer,Inject} from "angular2/core";
+import {bootstrap} from "angular2/platform/browser";
+
+@Directive({
+	selector:"[ez-h]",
+	inputs : ["bgColor:ez-h"],
+	host : {
+		"(click)" : "onClick($event)"
+	}
+})
+class EzHilight{
+	constructor(@Inject(ElementRef) er,@Inject(Renderer) renderer){
+		this.renderer = renderer;
+		this.er = er;
+		renderer.setElementStyle(er,"cursor","pointer");
+		this.flag = true;
+	}
+	set bgColor(v){
+    	this._bgColor = v;
+		this.renderer.setElementStyle(this.er,"background",v);
+	}
+    get bgColor(){
+    	return this._bgColor;
+    }
+	onClick($event){
+		if(this.flag) this.renderer.setElementStyle(this.er,"background","transparent");
+		else  this.renderer.setElementStyle(this.er,"background",this.bgColor);
+		this.flag = !this.flag;
+	}
+}
+
+//组件定义
+@Component({
+	selector : "ez-app",
+	directives:[EzHilight],
+	templateUrl :'ez-app.html'
+})
+class EzApp{}
+
+bootstrap(EzApp);
+
+
+</script>
+</body>
+</html>
